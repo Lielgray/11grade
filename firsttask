@@ -1,0 +1,142 @@
+import java.util.Arrays;
+
+public class firsttask {
+
+
+
+
+
+    public static boolean f9(int[] arr){
+        if (arr.length < 3) {
+            return false;            //בדיקה שבמערך יש לפחות שלושה תאים
+        }
+        for(int i=0; i< arr.length-2; i++){  //לולאה שתיכנס אל המערך ותעבור בין כול תא, arr.lenght-2 על מנת לא לחרוג מטווח המערך
+            if(arr[i]+arr[i+1] != arr[i+2]){    //אם תוצאת שני האיברים שונה מהאיבר השלישי מחזיר שקר
+                return false;
+            }
+        }
+        // אם הפעולה לא נכנסה בif הראשון והשני , כלומר נחזיר אמת
+        return true;
+    }
+
+
+
+    public static int[]  f12(int[] arr, int n, int m){
+        int[] arr2= new int[m-n+1]; //יצירת גודל המערך החדש
+
+        for (int i = n; i <= m; i++) {
+            arr2[i - n] = arr[i];  //כניסה ללולאה על מנת להכניס את ערכי המערך הראשון למיקומים מתאימים במערך השני
+        }
+        return arr2;  //החזרת המערך
+    }
+
+
+
+    public static String[] f13(String[] arr){
+        String[] arr2=new String[arr.length];  //יצירת מערך חדש לפי גודל המערך הקודם
+        for(int i=0; i< arr.length; i++){
+            arr2[i]=arr[i].charAt(0)+"";   // הכנסת ערכי האות הראשונה בכול תא במערך החדש לפי הסדר
+        }
+        return arr2;     //החזרת המערך
+
+    }
+
+
+
+
+
+
+
+    public static boolean f4IsDiverseNumber(int n) {
+        String number = String.valueOf(n);  // המרת המספר למחרוזת
+        for (int i = 0; i < number.length(); i++) {
+            for (int j = i + 1; j < number.length(); j++) {
+                if (number.charAt(i) == number.charAt(j)) {
+                    return false;  // יש כפילות, המספר אינו מגוון
+                }
+            }
+        }
+
+
+        for (int i = 1; i < number.length(); i++) {
+            if (number.charAt(i) <= number.charAt(i - 1)) {
+                return false;  // המספר לא בסדר עולה
+            }
+        }
+
+
+        return true;  // כל הספרות ייחודיות
+    }
+
+
+
+    public static int findLongestIncreasingSequence(int[] arr) {
+        if (arr.length == 0) {
+            return 0;  // בדיקה שהמערך מכיל ערכים והוא לא ריק
+        }
+
+        int length = 1;  // הבדיקה תמיד תתחיל מהאיבר הראשון במערך
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i] > arr[i - 1]) {
+                length++;  // ממשיכים את הרצף אם המספרים עולים
+            } else {
+                break;  // מפסיקים את הלולאה אם המספרים לא עולים יותר
+            }
+        }
+        return length;  // מחזירים את אורך הרצף העולה הארוך ביותר
+    }
+
+
+
+
+
+
+
+
+    public static void main(String[] args) {
+    
+        System.out.println(f9(new int[]{2, 4, 6, 10, 16})); // true
+        int[] result = f12(new int[]{3, 5, 6, 7, 8}, 2, 4);
+        System.out.println(Arrays.toString(result));   //[6,7,8]
+
+        System.out.println(Arrays.toString(f13(new String[]{"liel", "romi", "liri", "arial"}))); //[l,r,l,a]
+
+              System.out.println(f4IsDiverseNumber(1234));  // אמת
+            System.out.println(f4IsDiverseNumber(1243));  // שקר*/
+
+
+        int[] arr1 = {2, 4, 6, 8, 9, 7, 5, 3, 1};
+        int[] arr2 = {5, 4, 3, 2, 1};
+        int[] arr3 = {1, 2, 3, 4, 5};
+        int[] arr4 = {5, 6, 4, 2, 3, 1};
+
+        System.out.println(findLongestIncreasingSequence(arr1));  // מחזיר 5
+        System.out.println(findLongestIncreasingSequence(arr2));  // מחזיר 1
+        System.out.println(findLongestIncreasingSequence(arr3));  // מחזיר 5
+        System.out.println(findLongestIncreasingSequence(arr4));  // מחזיר 2
+
+
+
+
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
