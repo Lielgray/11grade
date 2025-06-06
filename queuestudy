@@ -1,0 +1,185 @@
+import javax.swing.*;
+import java.util.Queue;
+import java.util.LinkedList;
+
+public class queuestudy {
+//פעולה שמקבלת תור מטיפוס מספר שלם ומדפיסה את כול האיברים הזוגיים התור כולל שמירה על מבנה התור והדפסתו
+public static void f1(Queue<Integer> q){
+    Queue<Integer> temp = new LinkedList<>() {
+    };
+    while(!q.isEmpty()){
+        int x=q.remove();
+        if(x%2==0){
+            System.out.println(x);
+        }
+        temp.add(x);
+    }
+
+    while(!temp.isEmpty()){
+        q.add(temp.remove());
+    }
+    System.out.println(q);
+
+}
+    // כתוב פעולה שמקבלת תור מטיפוס שלם הפעולה תחזיר אמת אם כול המספרים בתור מתחלקים ב7 ללא שארית, אחרת תחזיר שקר
+    public static boolean f2(Queue<Integer> q2) {
+        Queue<Integer> temp2 = new LinkedList<>();
+
+        int x = 0;
+        boolean found = true;
+
+        while (!q2.isEmpty()) {
+            x = q2.remove();
+            if (x % 7 != 0) {
+                found = false;
+            }
+            temp2.add(x);
+
+        }
+        while (!temp2.isEmpty()){
+            q2.add(temp2.remove());
+    }
+        return found;
+    }
+
+//כתוב פעולה אשר מקבלת תור שלמים q, ומחזירה את המס' הגדול ביותר ושומרת על התור המקורי
+public static int f3(Queue<Integer> q3){
+    int max = q3.element();
+    Queue<Integer> temp3 = new LinkedList<>();
+
+    while (!q3.isEmpty())
+    {
+        if (q3.peek() > max)
+            max = q3.element();;
+        temp3.add(q3.remove());
+    }
+
+    while(!temp3.isEmpty())
+        q3.add(temp3.remove());
+    return max;
+
+}
+
+// פעולה שמקבלת תור מטיפוס מחרוזת מחזירה אמת אם כול המחרוזות מתחילות באות A\B אחרת מחזירה שקר ושומרת על התור המקורי
+
+public static boolean f4(Queue<String> q){
+    if (q.isEmpty()) {
+        return false;
+    }
+
+    boolean found=true;
+    Queue<String> temp= new LinkedList<>();
+
+    while (!q.isEmpty()) {
+        String x=q.remove();
+        if (x.charAt(0) != 'A' && x.charAt(0) != 'B') {
+            found = false;
+
+        }
+        temp.add(x);
+    }
+
+        while(!temp.isEmpty()){
+            q.add(temp.remove());
+
+        }
+    return found;
+
+}
+//    כתוב פעולה אשר מקבלת תור  q  מטיפוס מספר שלם.
+//    הפעולה תחזיר את כמות המספרים הזוגיים בתור.
+
+public static int f5(Queue<Integer> q5){
+
+
+    Queue<Integer> temp= new LinkedList<>();
+ int count=0;
+ while(!q5.isEmpty()){
+     int x=q5.remove();
+     if(x%2==0){
+         count++;
+     }
+
+     temp.add(x);
+
+ }
+while(!temp.isEmpty()){
+    q5.add(temp.remove());
+}
+return count;
+
+}
+
+
+
+//public static Queue<Character> delete(Queue<Character> q, String s){
+//    Queue<Character> temp=new LinkedList<>();
+//    Queue<Character> n= new LinkedList<>();
+//    for(int i=0; i<s.length(); i++){
+//        char x = s.charAt(i);
+//        while(!q.isEmpty()){
+//            char y=q.remove();
+//            if(x!=y){
+//                n.add(y);
+//            }
+//            temp.add(y);
+//
+//            }
+//
+//        while(!temp.isEmpty()){
+//            q.add(temp.remove());
+//            }
+//
+//
+//
+//    }
+//
+//}
+public static void main(String[] args){
+/*
+    Queue<Integer> q = new LinkedList<>();
+    q.add(3);
+    q.add(4);
+    q.add(6);
+    q.add(7);
+    q.add(8);
+    q.add(10);
+    f1(q);
+
+    Queue<Integer> q2 = new LinkedList<>();
+    q2.add(14);
+    q2.add(4);
+    q2.add(6);
+    q2.add(7);
+    q2.add(8);
+    q2.add(10);
+    System.out.println(f2(q2));
+
+    Queue<Integer> q3 = new LinkedList<>();
+    q3.add(3);
+    q3.add(3);
+    q3.add(56565);
+    q3.add(2);
+    q3.add(990);
+    System.out.println(f3(q3)); */
+
+   /* Queue<String> q= new LinkedList<>();
+    q.add("Akkaka");
+    q.add("Aiel");
+    q.add("BABSJ");
+    q.add("OOS");
+    q.add("ASDSSA");
+    System.out.println(f4(q));*/
+
+    Queue<Integer> q5= new LinkedList<>();
+    q5.add(32);
+    q5.add(2);
+    q5.add(3);
+    q5.add(3);
+    System.out.println(f5(q5));
+
+}
+
+
+}
+
