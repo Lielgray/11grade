@@ -1,0 +1,59 @@
+public class nodestudy {
+
+public static boolean f1(Node<Integer> n){
+
+    Node<Integer> pos= n;
+    while (pos!=null){
+        if(pos.getValue()%10 ==5){
+            return true;
+        }
+        pos=pos.getNext();
+    }
+
+
+return false;
+
+}
+
+public static int f5(Node<Integer> lst, int k){
+    Node<Integer> pos=lst;
+    int big= lst.getValue();
+    for(int i=0; i<=k; i++){
+
+        if(pos.getValue()>big){
+            big= pos.getValue();
+
+        }
+        pos=pos.getNext();
+    }
+
+return big;
+
+}
+
+
+
+
+
+public static void main(String args[]){
+    Node<Integer> head = new Node<>(53);
+    Node<Integer> second = new Node<>(51);
+    Node<Integer> third = new Node<>(52);
+    head.setNext(second);
+    second.setNext(third);
+
+    int result = f5(head, 2);
+    System.out.println(result);
+
+
+
+
+}
+
+
+
+
+
+
+
+}
