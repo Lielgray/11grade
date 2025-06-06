@@ -1,0 +1,260 @@
+public class binary {
+
+
+    public static void f1(BinNode<Integer> tr){
+
+        if(tr==null){
+           return;
+
+        }
+        if(tr.getValue() %2==0){
+            int half=tr.getValue()/2;
+            tr.setValue(half);
+        }
+        f1(tr.getLeft());
+        f1(tr.getRight());
+
+
+    }
+
+
+
+    public static void f2(BinNode<Integer> tr){
+
+        if(tr==null){
+            return;
+
+        }
+        if(tr.getValue() %2!=0){
+            int multiplayTwo=tr.getValue()*2;
+            tr.setValue(multiplayTwo);
+        }
+        f2(tr.getLeft());
+        f2(tr.getRight());
+
+
+    }
+public static int f3(BinNode<Integer> tr){
+
+        if(tr==null){
+            return 0;
+        }
+        int count= 0;
+        if(tr.getValue()%2==0){
+            count++;
+        }
+       count+= f3(tr.getLeft());
+    count+= f3(tr.getRight());
+
+return count;
+
+}
+
+public static int f4(BinNode<Integer> tr){
+
+        if(tr==null){
+            return 0;
+    }
+        int sum=0;
+        if(tr.getValue()%2==0) {
+          sum+=tr.getValue();
+
+        }
+        sum+=f4(tr.getLeft());
+    sum+= f4(tr.getRight());
+
+
+        return sum;
+}
+public static int f5(BinNode<Integer> tr){
+
+        if(tr==null){
+            return 0;
+        }
+        int sum=0;
+        if(tr.getLeft()==null&&tr.getRight()==null){
+            sum += tr.getValue();
+
+
+        }
+sum+= f5(tr.getLeft());
+    sum+= f5(tr.getRight());
+
+
+return sum;
+
+}
+
+public static boolean f6(BinNode<Integer> tr){
+        if(tr==null){
+            return false;
+        }
+if (tr.getValue()==5){
+    return true;
+}
+return f6(tr.getLeft())||f6(tr.getRight());
+
+
+}
+public static boolean f7(BinNode<Integer> tr){
+        if(tr==null){
+
+            return false;
+    }
+        if(tr.getValue()%3==0&&tr.getValue()%7==0){
+            return true;
+        }
+        return f7(tr.getLeft())||f7(tr.getRight());
+
+}
+
+public static  boolean f8(BinNode<Integer> tr){
+        if(tr==null){
+            return true;
+        }
+        if(tr.getValue()!=5){
+            return false;
+        }
+        return f8(tr.getLeft())&& f8(tr.getRight());
+
+}
+
+public static boolean f9(BinNode<Integer> tr){
+        if(tr==null){
+            return true;
+        }
+        if(tr.getValue()%2!=0){
+            return false;
+        }
+        return f9(tr.getLeft())&&f9(tr.getRight());
+}
+
+
+public static boolean f10(BinNode<Integer> tr){
+        if(tr==null){
+            return false;
+        }
+       if(tr.getValue()!=5){
+           return  false;
+       }
+    // אם הגענו לעלה (צומת ללא ילדים) והערך שלה 5, מצאנו את המסלול
+    if (tr.getLeft() == null && tr.getRight() == null) {
+        return true;
+    }
+
+    // נבדוק את הצאצאים (שמאל וימין) אם אחד מהם מכיל את המסלול התקני
+    return f10(tr.getLeft()) || f10(tr.getRight());
+}
+
+public static boolean isleaf(BinNode<Integer> tr){
+        if(tr==null){
+            return false;
+        }
+        return !tr.hasLeft()&&!tr.hasRight();
+
+
+}
+public static boolean onepath(BinNode<Integer> tr){
+        if(tr==null){
+            return false;
+        }
+        if(tr.getValue()!=1&&tr.getValue()!=2){
+            return false;
+        }
+        if(isleaf(tr)){
+            return true;
+        }
+        boolean left= tr.hasLeft()&&tr.getLeft().getValue()==tr.getValue();
+        boolean right= tr.hasRight()&&tr.getRight().getValue()==tr.getValue();
+        if(left||right){
+            return left&&onepath(tr.getLeft())||right&&onepath(tr.getRight());
+
+        }
+        return false;
+}
+public static boolean path(BinNode<Integer> tr){
+        if(tr==null){
+            return false;
+        }
+        if(tr.getValue()<0){
+            return false;
+        }
+        if(tr.getLeft()==tr.getRight()){
+            return true;
+        }
+        boolean left=(tr.hasLeft()&&tr.getLeft().getValue()- tr.getValue()==1);
+    boolean right=(tr.hasRight()&&tr.getRight().getValue()- tr.getValue()==1);
+    if(left||right){
+        return left&&path(tr.getLeft())||right&&path(tr.getRight());
+    }
+    return false;
+}
+    public static boolean even(BinNode<Integer> tr){
+        if (tr == null) {
+            return  false;
+
+        }
+        if(tr.getValue()%2!=0){
+            return false;
+        }
+        if(tr.getLeft()==tr.getRight()){
+            return true;
+        }
+        boolean left = (!tr.hasLeft()) || (tr.getLeft().getValue() == tr.getValue() + 2 && even(tr.getLeft()));
+
+        // נבדוק את הבן הימני אם קיים
+        boolean right = (!tr.hasRight()) || (tr.getRight().getValue() == tr.getValue() + 2 && even(tr.getRight()));
+
+        return left && right;
+
+    }
+
+
+
+
+
+
+    public static void main(String[] args){
+
+        BinNode<Integer> tr= new BinNode<Integer>(2);
+        BinNode<Integer> leftson= new BinNode<>(4);
+        tr.setLeft(leftson);
+        BinNode<Integer> leftrightson= new BinNode<>(8);
+        leftson.setRight(leftrightson);
+        BinNode<Integer> rightson= new BinNode<>(4);
+        tr.setRight(rightson);
+        BinNode<Integer> rightrightson= new BinNode<>(6);
+        rightson.setRight(rightrightson);
+        BinNode<Integer> rightleftson= new BinNode<>(8);
+        rightrightson.setLeft(rightleftson);
+        printTree(tr);
+            even(tr);
+        System.out.println(even(tr));
+        printTree(tr);
+
+    }
+
+    static int depth = 0;
+
+    static void printTree(BinNode<Integer> node)
+    {
+        if(node == null){
+            return;
+        }
+
+        depth++;
+        printTree(node.getRight());
+
+        for(var i = 1; i < depth; i++){
+            System.out.print("    ");
+        }
+        System.out.println(node);
+
+
+        printTree(node.getLeft());
+        depth--;
+    }
+
+
+
+}
