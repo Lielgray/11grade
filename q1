@@ -1,0 +1,68 @@
+
+import java.util.*;
+
+public class q1 {
+
+    public static Queue<Character> delete(Queue<Character> q, String s) {
+        Queue<Character> full = new Queue<>();
+
+        Queue<Character> temp = new Queue<Character>();
+        while (!q.isEmpty()) {
+            Character x = q.remove();
+            for (int i = 0; i <= s.length(); i++) {
+                if (x != s.charAt(i)) {
+                    full.insert(x);
+
+                }
+
+                temp.insert(x);
+
+
+            }
+
+
+        }
+        while (!temp.isEmpty()) {
+            q.insert(temp.remove());
+        }
+        return full;
+
+
+    }
+
+
+//    public static int SizeOfQ(Queue<Character> q) {
+//        int k = 0;
+//        while (!q) {
+//            k++;
+//        }
+//        return k;
+//    }
+
+
+    public static void main(String[] args){
+        Queue<Character> q = new Queue<Character>();
+
+        q.insert('a');
+        q.insert('b');
+        q.insert('c');
+        q.insert('d');
+        q.insert('e');
+
+        String s = "bd";
+
+        Queue<Character> result = delete(q, s);
+
+
+        System.out.println(result);
+
+
+    }
+
+
+
+
+
+
+
+}
